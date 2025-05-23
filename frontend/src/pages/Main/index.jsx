@@ -5,6 +5,7 @@ import Home from "./Home";
 import DefaultChatContainer from "@/components/DefaultChat";
 import { isMobile } from "react-device-detect";
 import Sidebar, { SidebarMobileHeader } from "@/components/Sidebar";
+import SidebarCanvas from "@/components/SidebarCanvas";
 import { userFromStorage } from "@/utils/request";
 
 export default function Main() {
@@ -17,6 +18,7 @@ export default function Main() {
   const user = userFromStorage();
   return (
     <div className="w-screen h-screen overflow-hidden bg-theme-bg-container flex">
+      {!isMobile && <SidebarCanvas />}
       {!isMobile ? <Sidebar /> : <SidebarMobileHeader />}
       {!!user && user?.role !== "admin" ? <DefaultChatContainer /> : <Home />}
     </div>
